@@ -137,13 +137,17 @@ var data = {
 };
 
 function init(wrapperId) {
-    wrapper = document.getElementById(wrapperId);
-    if (!wrapper) {
-        wrapper = document.createElement('div');
-        wrapper.id = wrapperId;
-        document.body.appendChild(wrapper);
-    }
-    list(data, wrapper);
+  var wrapper, data;
+
+  wrapper = document.getElementById(wrapperId);
+  if (!wrapper) {
+      wrapper = document.createElement('div');
+      wrapper.id = wrapperId;
+      document.body.appendChild(wrapper);
+  }
+
+  data = 
+  list(data, wrapper);
 }
 
 function list(data, wrapper) {
