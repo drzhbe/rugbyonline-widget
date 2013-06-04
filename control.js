@@ -1,6 +1,15 @@
 (function(exports) {
-    var widthElement = document.getElementById('widget-width');
+    var widthElement = document.getElementById('widget-width'),
+        codeElement = document.getElementById('widget-code');
     exports.addWidget = function() {
-        rugbyOnline.Widgets.News({width: widthElement.value});
+        var width = widthElement.value,
+            code = '';
+
+        code += 'rugbyOnline.Widgets.News({'
+            + (width ? 'width: ' + width : '') +
+        '});';
+        codeElement.value = code;
+
+        rugbyOnline.Widgets.News({width: width});
     };
 })(window);

@@ -4,8 +4,15 @@
     <meta charset='utf-8'> 
 </head>
 <body>
-    <input type='text' id='widget-width' placeholder='Ширина виджета' />
-    <input type='submit' id='widget-add' value='Добавить виджет' onclick='addWidget()' />
+    <div id='widget-control' style='float: left'>
+        <input type='text' id='widget-width' placeholder='Ширина виджета' />
+        <input type='submit' id='widget-add' value='Добавить виджет' onclick='addWidget()' />
+        <br>
+        <textarea id='widget-code' rows='10' cols='40'></textarea>
+    </div>
+
+    <div id='rugbyOnline-news-widget' style='float: left'></div>
+
     <script src='control.js'></script>
     <script src='rugbyonline-news-widget.js'></script>
 </body>
