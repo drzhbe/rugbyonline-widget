@@ -1,0 +1,21 @@
+body {
+    font-family: PTSerifRegular;
+}
+#rugbyOnline-news-widget {
+    float: left;
+}
+.row {
+    width: 400px;
+}
+.row .label {
+    width: 180px;
+    float: left;
+    text-align: right;
+    padding-right: 5px;
+    font-size: 16px;
+    color: #222;
+}
+.label-mid {
+    text-align: center;
+    color: #559;
+}

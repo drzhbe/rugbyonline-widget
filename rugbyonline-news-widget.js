@@ -26,7 +26,15 @@ rugbyOnline.Widgets.News = function(options) {
 
 rugbyOnline.Widgets._News = function(options) {
     this.wrapperId = options.wrapperId || 'rugbyOnline-news-widget',
-    this.width = options.width || 500;
+
+    this.width = options.width || '500px';
+    this.width += this.width.indexOf('px') === -1 ? 'px' : '';
+
+    this.border = options.border || '';
+
+    this.amount = options.amount || 5;
+    this.amount = options.amount > 20 ? 20 : this.amount;
+    this.amount = options.amount == 0 ? 5 : this.amount;
 
     this.getDataAndInit();
 };
@@ -56,7 +64,8 @@ rugbyOnline.Widgets._News.prototype.init = function(data) {
         wrapper.id = this.wrapperId;
         document.body.appendChild(wrapper);
     }
-    wrapper.style.width = this.width + 'px';
+    wrapper.style.width = this.width;
+    wrapper.style.border = this.border;
 
     title = document.createElement('h3');
     title.innerHTML = data.rss.channel.title;
@@ -82,7 +91,7 @@ rugbyOnline.Widgets._News.prototype.list = function(data, wrapper) {
     ul.style.marginTop = '0px';
     ul.style.marginBottom = '0px';
 
-    for (var i = 0; i < items.length; i++) {
+    for (var i = 0; i < this.amount; i++) {
         this.item(items[i], ul);
     }
     wrapper.appendChild(ul);

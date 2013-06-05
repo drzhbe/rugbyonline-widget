@@ -1,17 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'> 
+    <meta charset='utf-8'>
+    <link rel='stylesheet' href='style.css'>
 </head>
 <body>
     <div id='widget-control' style='float: left'>
-        <input type='text' id='widget-width' placeholder='Ширина виджета' />
+        <div class='row'>
+            <div class='label'>Ширина:</div>
+            <input type='text' id='widget-width' placeholder='500px' />
+        </div>
+
+        <div class='row'>
+            <div class='label'>Количество новостей:</div>
+            <input type='text' id='widget-amount' placeholder='5' />
+        </div>
+
+        <div class='label-mid'>Рамка</div>
+
+        <div class='row'>
+            <div class='label'>Ширина:</div>
+            <input type='text' id='widget-border-width' placeholder='1px' />
+            <div class='label'>Стиль:</div>
+            <input type='text' id='widget-border-style' placeholder='solid' />
+            <div class='label'>Цвет:</div>
+            <input type='text' id='widget-border-color' placeholder='rgb(40, 40, 40)' />
+        </div>
+
+        <div class='label-mid'>Заголовок</div>
+
+        <div class='row'>
+            <div class='label'>Размер:</div>
+            <input type='text' id='widget-title-size' placeholder='20px' />
+            <div class='label'>Цвет:</div>
+            <input type='text' id='widget-title-color' placeholder='#fff' />
+            <div class='label'>Фон:</div>
+            <input type='text' id='widget-title-background' placeholder='rgb(40, 40, 40)' />
+        </div>
+
+        <div class='label-mid'>Шрифт</div>
+
+        <div class='row'>
+            <div class='label'>Размер:</div>
+            <input type='text' id='widget-font-size' placeholder='16px' />
+            <div class='label'>Цвет:</div>
+            <input type='text' id='widget-font-color' placeholder='#000' />
+        </div>
+
         <input type='submit' id='widget-add' value='Добавить виджет' onclick='addWidget()' />
         <br>
         <textarea id='widget-code' rows='10' cols='40'></textarea>
     </div>
 
-    <div id='rugbyOnline-news-widget' style='float: left'></div>
+    <div id='rugbyOnline-news-widget'></div>
 
     <script src='control.js'></script>
     <script src='rugbyonline-news-widget.js'></script>
