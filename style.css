@@ -1,7 +1,8 @@
 body {
     font-family: PTSerifRegular;
 }
-#rugbyOnline-news-widget {
+#rugbyOnline-news-widget,
+#ro-table-widget {
     float: left;
 }
 .row {

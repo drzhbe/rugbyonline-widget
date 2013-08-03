@@ -1,0 +1,16 @@
+#ro-table-widget {
+	width: 250px;
+}
+#ro-table-widget table {
+	width: 220px;
+}
+#ro-table-widget tr {
+	text-align: left;
+}
+#ro-table-widget th,
+#ro-table-widget td {
+	text-align: left;
+}
+#ro-table-widget .ro-even {
+	background: #eee;
+}

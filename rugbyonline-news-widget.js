@@ -19,6 +19,21 @@ rugbyOnline.Utils.xhr = function() {
     }
     return xhr;
 };
+rugbyOnline.Utils.extend = function(to, from) {
+    for (var key in from) if (from.hasOwnProperty(key)) {
+        to[key] = from[key];
+    }
+};
+
+rugbyOnline.Widgets.headerStyle = {
+    backgroundColor: 'rgb(40,40,40)',
+    color: 'white',
+    fontSize: '20px',
+    paddingTop: '5px',
+    paddingLeft: '11px',
+    margin: '0px',
+    minHeight: '32px'
+};
 
 rugbyOnline.Widgets.News = function(options) {
     return new rugbyOnline.Widgets._News(options);
@@ -39,12 +54,15 @@ rugbyOnline.Widgets._News = function(options) {
     this.getDataAndInit();
 };
 
+// rugbyOnline.Widgets._News.prototype.url = 'http://rugbyonline.ru/api/news/json';
+rugbyOnline.Widgets._News.prototype.url = 'http://rugbyonline.ru/test.json';
+
 rugbyOnline.Widgets._News.prototype.getDataAndInit = function() {
     var xhr,
         that = this;
 
     xhr = rugbyOnline.Utils.xhr();
-    xhr.open('GET', 'http://rugbyonline.ru/test.json', true);
+    xhr.open('GET', this.url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
@@ -56,7 +74,7 @@ rugbyOnline.Widgets._News.prototype.getDataAndInit = function() {
 };
 
 rugbyOnline.Widgets._News.prototype.init = function(data) {
-    var wrapper, title, xhr;
+    var wrapper, title;
 
     wrapper = document.getElementById(this.wrapperId);
     if (!wrapper) {
@@ -69,13 +87,7 @@ rugbyOnline.Widgets._News.prototype.init = function(data) {
 
     title = document.createElement('h3');
     title.innerHTML = data.rss.channel.title;
-    title.style.backgroundColor = 'rgb(40,40,40)';
-    title.style.color = 'white';
-    title.style.fontSize = '20px';
-    title.style.paddingTop = '5px';
-    title.style.paddingLeft = '11px';
-    title.style.margin = '0px';
-    title.style.minHeight = '32px';
+    rugbyOnline.Utils.extend(title.style, rugbyOnline.Widgets.headerStyle); // set header styles
 
     wrapper.appendChild(title);
 

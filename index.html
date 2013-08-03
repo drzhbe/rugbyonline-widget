@@ -3,6 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <link rel='stylesheet' href='style.css'>
+    <link rel='stylesheet' href='rugbyonline-table-widget.css'>
 </head>
 <body>
     <div id='widget-control' style='float: left'>
@@ -50,11 +51,15 @@
         <input type='submit' id='widget-add' value='Добавить виджет' onclick='addWidget()' />
         <br>
         <textarea id='widget-code' rows='10' cols='40'></textarea>
+
+        <input type='submit' id='table-add' value='Добавить таблицу' onclick='addTable()' />
     </div>
 
     <div id='rugbyOnline-news-widget'></div>
 
+    <script src='table-data.js'></script>
     <script src='control.js'></script>
     <script src='rugbyonline-news-widget.js'></script>
+    <script src='rugbyonline-table-widget.js'></script>
 </body>
 </html>

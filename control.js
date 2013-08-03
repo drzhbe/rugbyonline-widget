@@ -38,4 +38,14 @@
         var widgetElement = document.getElementById('rugbyOnline-news-widget');
         document.body.removeChild(widgetElement);
     };
+
+    exports.addTable = function() {
+        removeTable();
+        rugbyOnline.Widgets.Table();
+    };
+    exports.removeTable = function() {
+        var widgetElement = document.getElementById('ro-table-widget');
+        if (widgetElement && widgetElement.parentNode)
+            widgetElement.parentNode.removeChild(widgetElement);
+    };
 })(window);
