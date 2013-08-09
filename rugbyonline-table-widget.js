@@ -2,18 +2,50 @@ if (typeof rugbyOnline !== 'object') rugbyOnline = {};
 if (!rugbyOnline.Utils) rugbyOnline.Utils = {};
 if (!rugbyOnline.Widgets) rugbyOnline.Widgets = {};
 
-rugbyOnline.Widgets.Table = function(options) {
-	return new rugbyOnline.Widgets._Table(options);
+rugbyOnline.Utils.xhr = function() {
+    var xhr;
+    try {
+        xhr = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+        try {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (E) {
+            xhr = false;
+        }
+    }
+    if (!xhr && typeof XMLHttpRequest!='undefined') {
+        xhr = new XMLHttpRequest();
+    }
+    return xhr;
 };
 
-rugbyOnline.Widgets._Table = function(options) {
+rugbyOnline.Widgets.table = function(options) {
+	return new rugbyOnline.Widgets.Table(options);
+};
+
+rugbyOnline.Widgets.Table = function(options) {
+	if (!options.tournamentNumber) {
+		throw new Error('You should pass tournamentNumber to rugbyOnline.Widgets.Table');
+	}
+	this.tournamentNumber = options.tournamentNumber;
+	this.title = options.title || 'Регби Онлайн Турниры';
+
+	if (options.titleBgColor) {
+		this.titleBgColor = options.titleBgColor;
+	}
+
+	if (options.width && options.width > 250) { // Min width is 250px
+		this.width = options.width;
+	}
+
+	this.url = 'http://rugbyonline.ru/api/tournaments/table/' + this.tournamentNumber + '/json';
+
 	this.getDataAndInit();
 	// this.init(tableData);
 };
 
-rugbyOnline.Widgets._Table.prototype.visibleColumns = ['team', 'g', 'pt']; // team, games and points
-rugbyOnline.Widgets._Table.prototype.url = 'http://rugbyonline.ru/api/tournaments/table/1/1/1/1/json';
-rugbyOnline.Widgets._Table.prototype.getDataAndInit = function() {
+rugbyOnline.Widgets.Table.prototype.visibleColumns = ['team', 'g', 'pt']; // team, games and points
+rugbyOnline.Widgets.Table.prototype.getDataAndInit = function() {
     var xhr,
         that = this;
 
@@ -28,7 +60,7 @@ rugbyOnline.Widgets._Table.prototype.getDataAndInit = function() {
     };
     xhr.send(null);
 };
-rugbyOnline.Widgets._Table.prototype.init = function(data) {
+rugbyOnline.Widgets.Table.prototype.init = function(data) {
 	if (!data || !data.data) throw new Error('rugbyOnline.Widgets.Table failed to init for lack of fetched data from ' + this.url);
 	data = data.data;
 
@@ -42,6 +74,11 @@ rugbyOnline.Widgets._Table.prototype.init = function(data) {
 			'pt': 'О'
 		};
 
+	if (this.width) {
+		table.style.width = this.width + 'px';
+		wrapper.style.width = this.width + 'px';
+	}
+
 	row = this.createRow(headers, '', true); // Add headers to the table and pass empty string as index
 	table.appendChild(row);
 
@@ -51,8 +88,11 @@ rugbyOnline.Widgets._Table.prototype.init = function(data) {
 	}
 
 	var header = document.createElement('h3');
-	header.innerHTML = 'Регби Онлайн Турниры';
-	rugbyOnline.Utils.extend(header.style, rugbyOnline.Widgets.headerStyle); // set header styles
+	header.innerHTML = this.title;
+	if (this.titleBgColor) {
+		header.style.backgroundColor = this.titleBgColor;
+	}
+	// rugbyOnline.Utils.extend(header.style, rugbyOnline.Widgets.headerStyle); // set header styles
 
 	wrapper.id = 'ro-table-widget';
 	wrapper.appendChild(header);
@@ -66,7 +106,7 @@ rugbyOnline.Widgets._Table.prototype.init = function(data) {
  * @param {Boolean} isHeader - should we crate row of th, or row of td.
  * @return {DOM}
  */
-rugbyOnline.Widgets._Table.prototype.createRow = function(data, i, isHeader) {
+rugbyOnline.Widgets.Table.prototype.createRow = function(data, i, isHeader) {
 	var key,
 		td,
 		tr = document.createElement('tr');
@@ -89,7 +129,7 @@ rugbyOnline.Widgets._Table.prototype.createRow = function(data, i, isHeader) {
  * @param {String} value
  * @param {Boolean} isHeader
  */
-rugbyOnline.Widgets._Table.prototype.addTd = function(tr, key, value, isHeader) {
+rugbyOnline.Widgets.Table.prototype.addTd = function(tr, key, value, isHeader) {
 	var td,
 		tdOrTh = isHeader ? 'th' : 'td';
 	td = document.createElement(tdOrTh);

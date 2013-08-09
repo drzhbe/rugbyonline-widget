@@ -1,8 +1,17 @@
 #ro-table-widget {
 	width: 250px;
 }
+#ro-table-widget h3 {
+	text-align: center;
+	background: rgb(40,40,40);
+    color: white;
+    font-size: 20px;
+    padding-top: 5px;
+    margin: 0px;
+    min-height: 32px;
+}
 #ro-table-widget table {
-	width: 220px;
+	width: 250px;
 }
 #ro-table-widget tr {
 	text-align: left;
@@ -14,3 +23,4 @@
 #ro-table-widget .ro-even {
 	background: #eee;
 }
+	

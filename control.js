@@ -41,7 +41,12 @@
 
     exports.addTable = function() {
         removeTable();
-        rugbyOnline.Widgets.Table();
+        rugbyOnline.Widgets.table({
+            tournamentNumber: 29,
+            title: 'Дыня торпеда оле-оле',
+            titleBgColor: '#999',
+            width: 250
+        });
     };
     exports.removeTable = function() {
         var widgetElement = document.getElementById('ro-table-widget');

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<link rel='stylesheet' href='rugbyonline-table-widget.css'>
+</head>
+<body>
+	<div>
+		Табличный виджет: минимальная ширина (Number) width 250, она же ширина по умолчанию; Если не передать (String) title, он будет "Регби Онлайн Турниры";
+        Параметр (String) tournamentNumber обязателен.
+	</div>
+	<br>
+	<div>Вставьте внутри тэга <strong>head</strong></div>
+	<textarea id='widget-code' rows='1' cols='60'>
+<link rel='stylesheet' href='rugbyonline-table-widget.css'>
+	</textarea>
+	<br>
+	<div>Вставьте в конец тэга <strong>body</strong></div>
+	<textarea id='widget-code' rows='10' cols='60'>
+<script src='rugbyonline-table-widget.js'></script>
+<script>
+	rugbyOnline.Widgets.table({
+            tournamentNumber: 29,
+            title: 'Дыня торпеда оле-оле',
+            titleBgColor: '#999',
+            width: 250
+        });
+</script>
+	</textarea>
+	<script src='rugbyonline-table-widget.js'></script>
+	<script>
+		rugbyOnline.Widgets.table({
+            tournamentNumber: 29,
+            title: 'Дыня торпеда оле-оле',
+            titleBgColor: '#999',
+            width: 250
+        });
+    </script>
+</body>
+</html>
