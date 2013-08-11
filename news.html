@@ -2,14 +2,37 @@
 <html>
 <head>
 	<meta charset='utf-8'>
-	<link rel='stylesheet' href='rugbyonline-news-widget.css'>
+	<link rel='stylesheet' href='rugbyonline-widget-news.css'>
 </head>
 <body>
-	<script src='rugbyonline-news-widget.js'></script>
+	<div>
+		Новостной виджет: Ширина (Number) width по умолчанию 500; Если не передать (String) title, он будет "Регби Онлайн Новости";
+        Параметр (Number) amount от 5 до 10 - количество отображаемых новостей.
+	</div>
+	<br>
+	<div>Вставьте внутри тэга <strong>head</strong></div>
+	<textarea id='widget-code' rows='1' cols='60'>
+<link rel='stylesheet' href='rugbyonline-widget-news.css'>
+	</textarea>
+	<br>
+	<div>Вставьте в конец тэга <strong>body</strong></div>
+	<textarea id='widget-code' rows='10' cols='60'>
+<script src='rugbyonline-widget-table.js'></script>
+<script>
+	rugbyOnline.Widgets.news({
+            title: 'Дынькины новости',
+            width: 300,
+            amount: 10
+        });
+</script>
+	</textarea>
+
+	<script src='rugbyonline-widget-news.js'></script>
 	<script>
 		rugbyOnline.Widgets.news({
-		    width: "300px", 
-		    amount: "10"
+		    title: 'Дынькины новости',
+            width: 300,
+            amount: 10
 		});
 	</script>
 </body>
