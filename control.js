@@ -29,14 +29,16 @@
             }
         }
 
-        code += 'rugbyOnline.Widgets.News({' + options + '});';
+        code += 'rugbyOnline.Widgets.news({' + options + '});';
         codeElement.value = code;
 
-        rugbyOnline.Widgets.News({width: width, amount: amount});
+        rugbyOnline.Widgets.news({width: width, amount: amount});
     };
     exports.removeWidget = function() {
-        var widgetElement = document.getElementById('rugbyOnline-news-widget');
-        document.body.removeChild(widgetElement);
+        var widgetElement = document.getElementById('ro-w-news');
+        if (widgetElement) {
+            document.body.removeChild(widgetElement);
+        }
     };
 
     exports.addTable = function() {
