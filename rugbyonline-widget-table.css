@@ -1,0 +1,26 @@
+#ro-w-table {
+	width: 250px;
+}
+#ro-w-table h3 {
+	text-align: center;
+	background: rgb(40,40,40);
+    color: white;
+    font-size: 20px;
+    padding-top: 5px;
+    margin: 0px;
+    min-height: 32px;
+}
+#ro-w-table table {
+	width: 250px;
+}
+#ro-w-table tr {
+	text-align: left;
+}
+#ro-w-table th,
+#ro-w-table td {
+	text-align: left;
+}
+#ro-w-table .ro-even {
+	background: #eee;
+}
+	
