@@ -110,12 +110,20 @@ rugbyOnline.Widgets.Table.prototype.init = function(data) {
 	var i,
 		row,
 		table = document.createElement('table'),
-		wrapper = document.createElement('div'),
+		wrapper = document.getElementById('ro-w-table'), // widget will be added to <div id='ro-w-table'></div> element
+		wrapperAppended = false;
 		headers = { // headers for the table
 			'team': 'Команда',
 			'g': 'И',
 			'pt': 'О'
 		};
+
+	if (wrapper) {
+		wrapperAppended = true;
+	} else {
+		wrapper = document.createElement('div');
+		wrapper.id = 'ro-w-table';
+	}
 
 	if (this.width) {
 		table.style.width = this.width + 'px';
@@ -135,12 +143,13 @@ rugbyOnline.Widgets.Table.prototype.init = function(data) {
 	if (this.titleBgColor) {
 		header.style.backgroundColor = this.titleBgColor;
 	}
-	// rugbyOnline.Utils.extend(header.style, rugbyOnline.Widgets.headerStyle); // set header styles
 
-	wrapper.id = 'ro-w-table';
 	wrapper.appendChild(header);
 	wrapper.appendChild(table);
-	document.body.appendChild(wrapper);
+
+	if (!wrapperAppended) {
+		document.body.appendChild(wrapper);
+	}
 };
 /**
  * Creates tr filled with td's or th's.

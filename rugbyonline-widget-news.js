@@ -137,7 +137,7 @@ rugbyOnline.Widgets.News.prototype.getDataAndInit = function() {
 };
 
 rugbyOnline.Widgets.News.prototype.init = function(data) {
-    var wrapper, title;
+    var wrapper, title, wrapperAppended;
 
     this.createAndAppendStyle();
 
@@ -145,7 +145,8 @@ rugbyOnline.Widgets.News.prototype.init = function(data) {
     if (!wrapper) {
         wrapper = document.createElement('div');
         wrapper.id = this.wrapperId;
-        document.body.appendChild(wrapper);
+    } else {
+        wrapperAppended = true;
     }
     wrapper.style.width = this.width;
     wrapper.style.border = this.border;
@@ -156,6 +157,10 @@ rugbyOnline.Widgets.News.prototype.init = function(data) {
     wrapper.appendChild(title);
 
     this.list(data, wrapper);
+
+    if (!wrapperAppended) {
+        document.body.appendChild(wrapper);
+    }
 };
 
 rugbyOnline.Widgets.News.prototype.list = function(data, wrapper) {
