@@ -44,6 +44,47 @@ rugbyOnline.Widgets.Table = function(options) {
 	// this.init(tableData);
 };
 
+rugbyOnline.Widgets.Table.prototype.style = "#ro-w-table { \
+	width: 250px; \
+} \
+#ro-w-table h3 { \
+	text-align: center; \
+	background: rgb(40,40,40); \
+    color: white; \
+    font-size: 20px; \
+    padding-top: 5px; \
+    margin: 0px; \
+    min-height: 32px; \
+} \
+#ro-w-table table { \
+	width: 250px; \
+} \
+#ro-w-table tr { \
+	text-align: left; \
+} \
+#ro-w-table th, \
+#ro-w-table td { \
+	text-align: left; \
+} \
+#ro-w-table .ro-even { \
+	background: #eee; \
+}";
+
+rugbyOnline.Widgets.Table.prototype.createAndAppendStyle = function() {
+    var css = this.style,
+        head = document.getElementsByTagName('head')[0],
+        style = document.createElement('style');
+
+    style.type = 'text/css';
+    if (style.styleSheet){
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+
+    head.appendChild(style);
+};
+
 rugbyOnline.Widgets.Table.prototype.visibleColumns = ['team', 'g', 'pt']; // team, games and points
 rugbyOnline.Widgets.Table.prototype.getDataAndInit = function() {
     var xhr,
@@ -63,6 +104,8 @@ rugbyOnline.Widgets.Table.prototype.getDataAndInit = function() {
 rugbyOnline.Widgets.Table.prototype.init = function(data) {
 	if (!data || !data.data) throw new Error('rugbyOnline.Widgets.Table failed to init for lack of fetched data from ' + this.url);
 	data = data.data;
+
+	this.createAndAppendStyle();
 
 	var i,
 		row,

@@ -25,16 +25,6 @@ rugbyOnline.Utils.extend = function(to, from) {
     }
 };
 
-// rugbyOnline.Widgets.headerStyle = {
-//     backgroundColor: 'rgb(40,40,40)',
-//     color: 'white',
-//     fontSize: '20px',
-//     paddingTop: '5px',
-//     paddingLeft: '11px',
-//     margin: '0px',
-//     minHeight: '32px'
-// };
-
 rugbyOnline.Widgets.news = function(options) {
     return new rugbyOnline.Widgets.News(options);
 };
@@ -75,6 +65,61 @@ rugbyOnline.Widgets.News.prototype.monthes = [
     'Декабря'   // 11
 ];
 
+/**
+ * To create multiline string pass backslashes at ends of lines http://davidwalsh.name/multiline-javascript-strings.
+ */
+rugbyOnline.Widgets.News.prototype.style = "#ro-w-news h3 { \
+    text-align: center; \
+    background: rgb(40,40,40); \
+    color: white; \
+    font-size: 20px; \
+    padding-top: 5px; \
+    margin: 0px; \
+    min-height: 32px; \
+} \
+ \
+#ro-w-news ul li { \
+    list-style: none; \
+    margin-top: 10px; \
+} \
+ \
+#ro-w-news ul li span { \
+    background: #2a82ba; \
+    color: #fff; \
+    width: 50px; \
+    padding: 0 6px; \
+    margin-right: 5px; \
+} \
+ \
+#ro-w-news ul li a { \
+    text-decoration: none; \
+    color: black; \
+} \
+ \
+#ro-w-news ul li a:hover { \
+    text-decoration: underline; \
+} \
+ \
+#ro-w-news .ro-w-news-date { \
+    font-size: 20px; \
+    border-bottom: 1px solid #bbb; \
+}";
+
+rugbyOnline.Widgets.News.prototype.createAndAppendStyle = function() {
+    var css = this.style,
+        head = document.getElementsByTagName('head')[0],
+        style = document.createElement('style');
+
+    style.type = 'text/css';
+    if (style.styleSheet){
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
+
+    head.appendChild(style);
+};
+
 rugbyOnline.Widgets.News.prototype.getDataAndInit = function() {
     var xhr,
         that = this;
@@ -93,6 +138,8 @@ rugbyOnline.Widgets.News.prototype.getDataAndInit = function() {
 
 rugbyOnline.Widgets.News.prototype.init = function(data) {
     var wrapper, title;
+
+    this.createAndAppendStyle();
 
     wrapper = document.getElementById(this.wrapperId);
     if (!wrapper) {
