@@ -69,6 +69,9 @@ rugbyOnline.Widgets.Table.prototype.style = "#ro-w-table { \
 } \
 #ro-w-table .ro-even { \
 	background: #eee; \
+} \
+#ro-w-table .ro-owner { \
+	font-weight: bold; \
 }";
 
 rugbyOnline.Widgets.Table.prototype.createAndAppendStyle = function() {
@@ -197,7 +200,7 @@ rugbyOnline.Widgets.Table.prototype.addTd = function(tr, key, value, isHeader) {
 };
 
 rugbyOnline.Widgets.Table.prototype.addClass = function(element, className) {
-    var classes = element.className.split(' ');
+    var classes = element.className ? element.className.split(' ') : [];
     classes.push(className);
     element.className = classes.join(' ');
 };
