@@ -1,0 +1,57 @@
+Табличный виджет: минимальная ширина (Number) width 250, она же ширина по умолчанию; Если не передать (String) title, он будет "Регби Онлайн Турниры"; Параметр (String) tournamentNumber обязателен.
+
+1. Добавьте в нужном месте страницы div элемент с id='ro-w-table': <div id='ro-w-table'></div>
+
+2. Вставьте в конец тэга body
+
+<script src='http://rugbyonline.ru/rugbyonline-widget-table.js'></script>
+<script>
+	rugbyOnline.Widgets.table({
+            tournamentNumber: 29,
+            title: 'ПРЛ 2013',
+            titleBgColor: 'rgb(40,40,40)',
+            owner: '',
+            width: 250
+        });
+</script>
+
+3. Если вы хотите выделить какую-либо команду в таблице: заполните поле owner названием команды (см. пример)
+По умолчанию выделение в виде жирного шрифта. Управлять выделением можно через css с помощью конструкции
+
+.ro-owner {
+    font-weight: normal;
+}
+
+или
+
+.ro-owner {
+    font-weight: normal !important;
+}
+
+4. пример
+
+
+<html>
+<head>
+<title>test page</title>
+</head>
+<body>
+</body>
+<table border=1>
+<tr><td>111<td><div id='ro-w-table'></div></tr>
+<tr><td>222<td>333</tr>
+<script src='http://rugbyonline.ru/rugbyonline-widget-table.js'></script>
+<script>
+        rugbyOnline.Widgets.table({
+            tournamentNumber: 29,
+            title: 'ПРЛ 2013',
+            titleBgColor: 'rgb(40,40,40)',
+            owner: 'Фили',
+            width: 250
+        });
+</script>
+
+</script>
+</table>
+</html>
+
