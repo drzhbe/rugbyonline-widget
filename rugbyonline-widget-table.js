@@ -2,18 +2,26 @@ if (typeof rugbyOnline !== 'object') rugbyOnline = {};
 if (!rugbyOnline.Utils) rugbyOnline.Utils = {};
 if (!rugbyOnline.Widgets) rugbyOnline.Widgets = {};
 
-rugbyOnline.Utils.xhr = function(method, url) {
+rugbyOnline.Utils.xhr = function(method, url, callback) {
     function createCORSRequest(method, url) {
       var xhr = new XMLHttpRequest();
       if ("withCredentials" in xhr) {
         // Check if the XMLHttpRequest object has a "withCredentials" property.
         // "withCredentials" only exists on XMLHTTPRequest2 objects.
         xhr.open(method, url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    callback();
+                }
+            }
+        };
       } else if (typeof XDomainRequest != "undefined") {
         // Otherwise, check if XDomainRequest.
         // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
         xhr = new XDomainRequest();
         xhr.open(method, url);
+        xhr.onload = callback;
       } else {
         // Otherwise, CORS is not supported by the browser.
         xhr = null;
@@ -26,8 +34,10 @@ rugbyOnline.Utils.xhr = function(method, url) {
       throw new Error('CORS not supported');
     }
   
+    xhr.send(null);
+
     return xhr;
-}
+};
 
 
 
@@ -103,17 +113,10 @@ rugbyOnline.Widgets.Table.prototype.createAndAppendStyle = function() {
 
 rugbyOnline.Widgets.Table.prototype.visibleColumns = ['team', 'g', 'pt']; // team, games and points
 rugbyOnline.Widgets.Table.prototype.getDataAndInit = function() {
-    var that = this,
-    	xhr = rugbyOnline.Utils.xhr('GET', that.url);
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                that.init(JSON.parse(xhr.responseText));
-            }
-        }
-    };
-    xhr.send(null);
+    var that = this;
+	rugbyOnline.Utils.xhr('GET', that.url, function() {
+        that.init(JSON.parse(xhr.responseText));
+	});
 };
 rugbyOnline.Widgets.Table.prototype.init = function(data) {
 	if (!data || !data.data) throw new Error('rugbyOnline.Widgets.Table failed to init for lack of fetched data from ' + this.url);
