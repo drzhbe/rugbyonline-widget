@@ -29,6 +29,7 @@ rugbyOnline.Widgets.Table = function(options) {
 	}
 	this.tournamentNumber = options.tournamentNumber;
 	this.title = options.title || 'Регби Онлайн Турниры';
+	this.owner = options.owner; // если виджет используется на сайте клуба - можно выделить свою команду
 
 	if (options.titleBgColor) {
 		this.titleBgColor = options.titleBgColor;
@@ -164,12 +165,16 @@ rugbyOnline.Widgets.Table.prototype.createRow = function(data, i, isHeader) {
 		tr = document.createElement('tr');
 
 	if ( typeof i == 'number' && !(i % 2) )
-		tr.className = ' ro-even'; // differ odd and even rows
+		this.addClass(tr, 'ro-even'); // differ odd and even rows
 
 	this.addTd(tr, 'index', i, isHeader); // add index field
 	for (key in data) if (data.hasOwnProperty(key)) {
 		if (this.visibleColumns.indexOf(key) == -1) continue;
 		this.addTd(tr, key, data[key], isHeader);
+	}
+	
+	if (data.team == this.owner) {
+	    this.addClass(tr, 'ro-owner');
 	}
 
 	return tr;
@@ -189,4 +194,10 @@ rugbyOnline.Widgets.Table.prototype.addTd = function(tr, key, value, isHeader) {
 	td.innerHTML = value;
 
 	tr.appendChild(td);
+};
+
+rugbyOnline.Widgets.Table.prototype.addClass = function(element, className) {
+    var classes = element.className.split(' ');
+    classes.push(className);
+    element.className = classes.join(' ');
 };
