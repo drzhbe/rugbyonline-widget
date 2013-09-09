@@ -2,22 +2,6 @@ if (typeof rugbyOnline !== 'object') rugbyOnline = {};
 if (!rugbyOnline.Utils) rugbyOnline.Utils = {};
 if (!rugbyOnline.Widgets) rugbyOnline.Widgets = {};
 
-rugbyOnline.Utils.xhr = function() {
-    var xhr;
-    try {
-        xhr = new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (e) {
-        try {
-            xhr = new ActiveXObject("Microsoft.XMLHTTP");
-        } catch (E) {
-            xhr = false;
-        }
-    }
-    if (!xhr && typeof XMLHttpRequest!='undefined') {
-        xhr = new XMLHttpRequest();
-    }
-    return xhr;
-};
 rugbyOnline.Utils.xhr = function(method, url) {
     function createCORSRequest(method, url) {
       var xhr = new XMLHttpRequest();
@@ -37,7 +21,7 @@ rugbyOnline.Utils.xhr = function(method, url) {
       return xhr;
     }
 
-    xhr = createCORSRequest('GET', url);
+    xhr = createCORSRequest(method, url);
     if (!xhr) {
       throw new Error('CORS not supported');
     }
