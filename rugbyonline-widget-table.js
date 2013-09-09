@@ -119,8 +119,8 @@ rugbyOnline.Widgets.Table.prototype.createAndAppendStyle = function() {
 
 rugbyOnline.Widgets.Table.prototype.visibleColumns = ['team', 'g', 'pt']; // team, games and points
 rugbyOnline.Widgets.Table.prototype.getDataAndInit = function() {
-    var xhr = rugbyOnline.Utils.xhr('GET', that.url),
-        that = this;
+    var that = this,
+    	xhr = rugbyOnline.Utils.xhr('GET', that.url);
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
