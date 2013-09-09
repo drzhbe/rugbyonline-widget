@@ -23,8 +23,8 @@
 <body>
 </body>
 <table border=1>
-<tr><td>111</td><div id='ro-w-news'></div></tr>
-<tr><td>222</td>333</tr>
+<tr><td>111<td><div id='ro-w-news'></div></tr>
+<tr><td>222<td>333</tr>
 <script src='http://rugbyonline.ru/rugbyonline-widget-news.js'></script>
 <script>
         rugbyOnline.Widgets.news({
