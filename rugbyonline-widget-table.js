@@ -18,6 +18,34 @@ rugbyOnline.Utils.xhr = function() {
     }
     return xhr;
 };
+rugbyOnline.Utils.xhr = function(method, url) {
+    function createCORSRequest(method, url) {
+      var xhr = new XMLHttpRequest();
+      if ("withCredentials" in xhr) {
+        // Check if the XMLHttpRequest object has a "withCredentials" property.
+        // "withCredentials" only exists on XMLHTTPRequest2 objects.
+        xhr.open(method, url, true);
+      } else if (typeof XDomainRequest != "undefined") {
+        // Otherwise, check if XDomainRequest.
+        // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+      } else {
+        // Otherwise, CORS is not supported by the browser.
+        xhr = null;
+      }
+      return xhr;
+    }
+
+    xhr = createCORSRequest('GET', url);
+    if (!xhr) {
+      throw new Error('CORS not supported');
+    }
+  
+    return xhr;
+}
+
+
 
 rugbyOnline.Widgets.table = function(options) {
 	return new rugbyOnline.Widgets.Table(options);
@@ -91,11 +119,9 @@ rugbyOnline.Widgets.Table.prototype.createAndAppendStyle = function() {
 
 rugbyOnline.Widgets.Table.prototype.visibleColumns = ['team', 'g', 'pt']; // team, games and points
 rugbyOnline.Widgets.Table.prototype.getDataAndInit = function() {
-    var xhr,
+    var xhr = rugbyOnline.Utils.xhr('GET', that.url),
         that = this;
 
-    xhr = rugbyOnline.Utils.xhr();
-    xhr.open('GET', that.url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
