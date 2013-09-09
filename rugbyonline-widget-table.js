@@ -4,7 +4,7 @@ if (!rugbyOnline.Widgets) rugbyOnline.Widgets = {};
 
 rugbyOnline.Utils.xhr = function(method, url, callback) {
     function createCORSRequest(method, url) {
-      var xhr = new XMLHttpRequest();
+      var xhr = XMLHttpRequest ? new XMLHttpRequest() : {};
       if ("withCredentials" in xhr) {
         // Check if the XMLHttpRequest object has a "withCredentials" property.
         // "withCredentials" only exists on XMLHTTPRequest2 objects.
