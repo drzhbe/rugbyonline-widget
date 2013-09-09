@@ -1,0 +1,38 @@
+Новостной виджет: Ширина (Number) width по умолчанию 500; Если не передать (String) title, он будет "Регби Онлайн Новости"; Параметр (Number) amount от 5 до 10 - количество отображаемых новостей.
+
+1. Добавьте в нужном месте страницы div элемент с id='ro-w-news' : <div id='ro-w-news'></div>
+
+2. Вставьте в конец тэга body
+
+<script src='http://rugbyonline.ru/rugbyonline-widget-news.js'></script>
+<script>
+	rugbyOnline.Widgets.news({
+            title: 'Новости регби',
+            width: 200,
+            amount: 10
+        });
+</script>
+
+3. чтобы потестировать и посмотреть как выглядит, можно создать тестовый файлик и открыть в браузере:
+
+
+<html>
+<head>
+<title>test page</title>
+</head>
+<body>
+</body>
+<table border=1>
+<tr><td>111<td><div id='ro-w-news'></div></tr>
+<tr><td>222<td>333</tr>
+<script src='http://rugbyonline.ru/rugbyonline-widget-news.js'></script>
+<script>
+        rugbyOnline.Widgets.news({
+            title: 'Новости регби',
+            width: 200,
+            amount: 10
+        });
+</script>
+</table>
+</html>
+
